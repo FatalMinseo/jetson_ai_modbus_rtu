@@ -1,0 +1,39 @@
+# DeepStream nvinfer 설정 템플릿 — traffic_infer_ds.engine (YOLO11n 파인튜닝, 5-class)
+# 실제 웹 런타임은 ds/parts/50_state_config.py에서 /tmp/nvinfer_cfg_*.txt를 동적으로 생성한다.
+# 이 파일은 수동 DeepStream 점검/문서용 기준 설정이다.
+# network-type=100 + output-tensor-meta=1: Python probe에서 텐서 직접 파싱
+# model-color-format=1: RGB 입력 (YOLO11/ultralytics 학습 포맷과 일치)
+# maintain-aspect-ratio=1: center letterbox (비율 보존 → 차량 형태 유지)
+
+[property]
+gpu-id=0
+net-scale-factor=0.0039215697906911373
+model-engine-file=../models/traffic_infer_ds.engine
+labelfile-path=labels.txt
+batch-size=1
+network-type=100
+num-detected-classes=5
+interval=0
+gie-unique-id=1
+process-mode=1
+
+# Python 측 텐서 직접 파싱 (표준 파서 비활성)
+output-tensor-meta=1
+output-blob-names=output0
+
+# 클러스터링 비활성 (Python 측 NMS 처리)
+cluster-mode=4
+
+# 입력 해상도
+infer-dims=3;640;640
+
+# letterbox 유지 (비율 보존 → truck/car 오분류 방지)
+maintain-aspect-ratio=1
+symmetric-padding=1
+
+# Jetson/JP 6.2 계열 nvbufsurftransform 우회: VIC 스케일링 사용
+scaling-compute-hw=2
+scaling-filter=0
+
+# RGB 입력 — YOLO11은 RGB로 학습됨, nvinfer 기본값 BGR(0)이면 색상 반전
+model-color-format=1

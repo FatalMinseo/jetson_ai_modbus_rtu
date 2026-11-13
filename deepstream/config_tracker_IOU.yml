@@ -1,0 +1,52 @@
+%YAML:1.0
+# IOU 경량 프로파일
+# DeepStream의 multi-object tracker 라이브러리를 사용하되
+# 시각 특징 추적을 사실상 끄고 overlap 기반 연관에 가깝게 동작시킨다.
+
+BaseConfig:
+  minDetectorConfidence: 0.0
+
+TargetManagement:
+  enableBboxUnClipping: 0
+  preserveStreamUpdateOrder: 0
+  maxTargetsPerStream: 150
+  minIouDiff4NewTarget: 0.45
+  minTrackerConfidence: 0.20
+  probationAge: 1
+  maxShadowTrackingAge: 8
+  earlyTerminationAge: 1
+
+TrajectoryManagement:
+  useUniqueID: 0
+
+DataAssociator:
+  dataAssociatorType: 0
+  associationMatcherType: 0
+  checkClassMatch: 0
+  minMatchingScore4Overall: 0.20
+  minMatchingScore4SizeSimilarity: 0.20
+  minMatchingScore4Iou: 0.30
+  minMatchingScore4VisualSimilarity: 0.0
+  matchingScoreWeight4VisualSimilarity: 0.0
+  matchingScoreWeight4SizeSimilarity: 0.20
+  matchingScoreWeight4Iou: 0.80
+  tentativeDetectorConfidence: 0.10
+  minMatchingScore4TentativeIou: 0.30
+
+StateEstimator:
+  stateEstimatorType: 1
+  processNoiseVar4Loc: 2.0
+  processNoiseVar4Size: 2.0
+  processNoiseVar4Vel: 0.10
+  measurementNoiseVar4Detector: 4.0
+  measurementNoiseVar4Tracker: 10.0
+
+VisualTracker:
+  visualTrackerType: 0
+  useColorNames: 0
+  useHog: 0
+  featureImgSizeLevel: 1
+  featureFocusOffsetFactor_y: 0.0
+  filterLr: 0.20
+  filterChannelWeightsLr: 0.20
+  gaussianSigma: 1.00

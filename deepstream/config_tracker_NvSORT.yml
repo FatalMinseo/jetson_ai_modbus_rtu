@@ -1,0 +1,37 @@
+%YAML:1.0
+# NvSORT 트래커 — IOU보다 안정적이고 NvDCF보다 가벼운 Kalman/SORT 계열 프로파일
+
+BaseConfig:
+  minDetectorConfidence: 0.0
+
+TargetManagement:
+  enableBboxUnClipping: 0
+  preserveStreamUpdateOrder: 0
+  maxTargetsPerStream: 150
+  minIouDiff4NewTarget: 0.55
+  minTrackerConfidence: 0.70
+  probationAge: 3
+  maxShadowTrackingAge: 30
+  earlyTerminationAge: 1
+
+TrajectoryManagement:
+  useUniqueID: 0
+
+DataAssociator:
+  dataAssociatorType: 0
+  associationMatcherType: 1
+  checkClassMatch: 0
+  minMatchingScore4Overall: 0.25
+  minMatchingScore4SizeSimilarity: 0.35
+  minMatchingScore4Iou: 0.20
+  matchingScoreWeight4SizeSimilarity: 0.15
+  matchingScoreWeight4Iou: 0.40
+  tentativeDetectorConfidence: 0.20
+  minMatchingScore4TentativeIou: 0.30
+  usePrediction4Assoc: 1
+
+StateEstimator:
+  stateEstimatorType: 2
+  noiseWeightVar4Loc: 0.03
+  noiseWeightVar4Vel: 0.002
+  useAspectRatio: 1

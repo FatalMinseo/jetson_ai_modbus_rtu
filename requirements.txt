@@ -1,0 +1,5 @@
+Flask>=2.2
+numpy<2
+psutil>=5.9
+Pillow>=9
+pyserial>=3.5

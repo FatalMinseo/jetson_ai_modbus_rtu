@@ -1,0 +1,30 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	overlay-name = "Jetson BOARD 29 GPIO output";
+	jetson-header-name = "Jetson 40pin Header";
+	compatible = "nvidia,p3768-0000+p3767-0005-super",
+		     "nvidia,p3768-0000+p3767-0005";
+
+	fragment@0 {
+		target = <&pinmux>;
+
+		__overlay__ {
+			pinctrl-names = "default";
+			pinctrl-0 = <&jetson_board29_gpio_output>;
+
+			jetson_board29_gpio_output: jetson-board29-gpio-output {
+				hdr40-pin29 {
+					nvidia,pins = "soc_gpio32_pq5";
+					nvidia,function = "rsvd0";
+					nvidia,pull = <0>;
+					nvidia,tristate = <0>;
+					nvidia,enable-input = <0>;
+					nvidia,io-high-voltage = <0>;
+					nvidia,lpdr = <0>;
+				};
+			};
+		};
+	};
+};

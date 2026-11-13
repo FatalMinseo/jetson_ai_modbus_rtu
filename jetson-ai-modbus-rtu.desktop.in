@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Jetson AI Modbus RTU
+Comment=로컬 객체 탐지 및 Modbus RTU 설정 화면
+Exec=@APP_DIR@/jetsonctl.sh ui
+Path=@APP_DIR@
+Icon=video-display
+Terminal=false
+StartupNotify=true
+Categories=Utility;
